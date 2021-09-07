@@ -16,7 +16,7 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 flash('Welcome back!',category='success')
-                login_user(user, remember=True)
+                login_user(user)
                 return redirect(url_for('presentation.home'))
             else:
                 flash('Invalid password. Try again',category='error')
@@ -30,7 +30,7 @@ def logout():
     logout_user()
     return redirect(url_for('presentation.welcome'))
 
-@auth.route('signup',methods=['GET', 'POST'])
+@auth.route('/signup',methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
         email = request.form['email']
@@ -45,7 +45,7 @@ def signup():
                 new_user = User(email=email, password=generate_password_hash(password1), name=name)
                 db.session.add(new_user)
                 db.session.commit()
-                login_user(new_user, remember=True)
+                login_user(new_user)
                 flash('Signed up successfully', category='success')
                 
                 return redirect(url_for('presentation.home'))

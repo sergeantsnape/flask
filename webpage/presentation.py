@@ -6,15 +6,14 @@ presentation = Blueprint('presentation',__name__)
 @presentation.route('/home')
 @login_required
 def home():
-    name = current_user.name
-    return render_template('home.html',user=current_user,name=name)
+    return render_template('home.html',user=current_user)
 
 @presentation.route('/')
 def welcome():
+    print("WELCOME)")
     return render_template('welcome.html',user=current_user)
 
-@presentation.route('/profile')
+@presentation.route('/profile',methods=['GET','POST'])
 @login_required
 def profile():
-    name=current_user.name
-    return render_template('profile.html',user=current_user,name=name)
+    return render_template('profile.html',user=current_user)

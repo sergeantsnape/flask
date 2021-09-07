@@ -15,9 +15,11 @@ def create_app():
 
     from .presentation import presentation
     from .auth import auth
+    from .functions import functions
 
     app.register_blueprint(presentation, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(functions, url_prefix='/')
 
     from .model import User,Todo
 
